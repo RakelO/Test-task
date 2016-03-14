@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<style>
+
+	ul{
+		
+		list-style: none;
+		padding: 0;
+	}
+
+	li{
+		height: 20px;
+		margin: 8px 0;
+		padding: 0 4px;
+	}
+
+	.btn-close{
+		width: 20px;
+		height: 20px;
+		border: 1px solid black;
+		background: transparent;
+		margin-left: 8px;
+		padding: 0;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	.btn-new{
+		background: transparent;
+		border: 1px solid black;
+		cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		<li>элемент списка1<button class="btn-close" data-action="remove">X</button></li>
+		<li>элемент списка2<button class="btn-close" data-action="remove">X</button></li>
+		<li>элемент списка3<button class="btn-close" data-action="remove">X</button></li>
+		<li>элемент списка4<button class="btn-close" data-action="remove">X</button></li>
+		<li>элемент списка5<button class="btn-close" data-action="remove">X</button></li>
+	</ul>
+	<button class="btn-new" data-action="add">кнопка</button>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function(){
+			var number = document.getElementsByTagName('li').length+1;
+			var list = document.getElementById('list');
+
+			document.addEventListener('click', function(){
+				var action = event.target.getAttribute('data-action');
+
+				if (action === 'add') {
+					var newLi = document.createElement('li');
+					newLi.innerHTML = 'элемент списка' + number + '<button class="btn-close" data-action="remove">X</button>';
+					list.appendChild(newLi);
+					number++;
+				}
+
+				if (action === 'remove') {
+					var elemToRemove = event.target.parentElement;
+					elemToRemove.parentNode.removeChild(elemToRemove);
+				}
+			});
+		});
+	</script>
+</body>
+</html>
